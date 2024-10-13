@@ -1,0 +1,114 @@
+//Assignment -2
+//Student information management
+//Mehedi hassan
+import java.util.Scanner;
+import java.util.ArrayList;
+class Student{
+	int ID;
+	String Name;
+	ArrayList<Double> Grade;
+	double GPA;
+	Student(int ID,String Name,ArrayList<Double> Grade,double GPA){
+		this.ID=ID;
+		this.Name=Name;
+		this.Grade=Grade;
+		this.GPA=GPA;
+	}
+	public String getName(){
+		return Name;
+	}
+	public int getID(){
+			return ID;
+	}
+	public ArrayList<Double> getGrade(){
+			return Grade;
+	}
+	public double getGPA(){
+			return GPA;
+	}
+	public void setGrade(){
+			this.Grade=Grade;
+	}
+	public void setGPA(double GPA){
+			this.GPA=GPA;
+	}
+
+}
+ class StudentDatabase{
+	 Scanner sc=new Scanner(System.in);
+	 ArrayList<Student>studentList=new ArrayList<>();
+	 public void addStudent(Student student){
+		 studentList.add(student);
+	 }
+
+	 public void DisplayStudentInfo(){
+	 		for(Student student:studentList){
+	 			System.out.print("Student ID:");
+	 			System.out.println(student.getID());
+	 			System.out.print("Student Name:");
+	 			System.out.println(student.getName());
+	 			System.out.print("Student grades are:");
+	 			System.out.println(student.getGrade());
+	 			System.out.print("Student GPA:");
+	 			System.out.println(student.getGPA());
+	 			System.out.println("--------------------------");
+	 		}
+	}
+	 public void SearchByID(int id){
+		 for(Student student:studentList){
+			 if(student.getID()==id){
+				                System.out.print("Student ID:");
+				 	 			System.out.println(student.getID());
+				 	 			System.out.print("Student Name:");
+				 	 			System.out.println(student.getName());
+				 	 			System.out.print("Student grades are:");
+	 			                System.out.println(student.getGrade());
+				 	 			System.out.print("Student GPA:");
+	 			                System.out.println(student.getGPA());
+	 			                System.out.println("--------------------------");
+			 }
+		 }
+	 }
+ }
+ //main class
+ class StuInfoMan{
+	 public static void main(String[] args){
+		 Scanner sc=new Scanner(System.in);
+		 StudentDatabase d=new StudentDatabase();
+		 while(true){
+			 System.out.println("What do you want to do?\n 1.Add student\n 2.Display student information\n 3.Search student by ID\n 4.Exit");
+			 int b=sc.nextInt();
+			 switch(b){
+				 case 1:System.out.print("How many number of student you want to add:");
+				        int e=sc.nextInt();
+				        for(int i=1;i<e+1;i++){
+							         System.out.print("Enter ID:");
+									 int ID=sc.nextInt();
+									 System.out.print("Enter Student Name:");
+									 String Name=sc.next();
+									 System.out.print("How many grades are you want to add:");
+									 ArrayList<Double>grades=new ArrayList<>();
+									 int a=sc.nextInt();
+									 double sum=0;
+									 for(int j=1;j<a+1;j++){
+										 double g=sc.nextDouble();
+										 sum=sum+g;
+										 grades.add(g);
+									 }
+
+		                             double GPA=sum/a;
+		                             d.addStudent(new Student(ID,Name,grades,GPA));
+						}
+				 break;
+				 case 2:d.DisplayStudentInfo();
+				 break;
+				 case 3:System.out.print("which ID you want to search:");
+				        int c=sc.nextInt();
+				        d.SearchByID(c);
+				 break;
+				 case 4: return;
+				 default :System.out.println("Invalid key");
+			 }
+		 }
+	 }
+ }

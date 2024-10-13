@@ -1,0 +1,188 @@
+//Java_Assignment:1
+//Mehedi hassan
+import java.util.ArrayList;
+import java.util.Scanner;
+class Item{
+	String name;
+	String type;
+	double price;
+	int quantity;
+
+	Item(String name,String type,double price,int quantity){
+		this.name=name;
+		this.type=type;
+		this.price=price;
+		this.quantity=quantity;
+	}
+	public String getName(){
+		return name;
+	}
+	public String getType(){
+			return type;
+	}
+	public double getPrice(){
+			return price;
+	}
+	public int getQuantity(){
+				return quantity;
+	}
+	public void  setQuantity(int q){
+		quantity=quantity+q;
+	}
+}
+
+class inventory{
+	Scanner sc=new Scanner(System.in);
+	ArrayList<Item> itemlist=new ArrayList<Item>();
+	public void additem(Item item){
+		itemlist.add(item);
+	}
+	public void displayitem(){
+		for (Item item:itemlist){
+        System.out.print("Item Name: ");
+        System.out.println(item.getName());
+	    System.out.print("Item Type: ");
+        System.out.println(item.getType());
+        System.out.print("Item price: ");
+        System.out.println(item.getPrice());
+        System.out.print("Item Quantity: ");
+        System.out.println(item.getQuantity());
+			System.out.println();
+		}
+	}
+	public void categoryWiseDisplay(){
+		System.out.println("Fruits items are.....");
+		for (Item item:itemlist){
+			if(item.getType().equals("Fruit")||item.getType().equals("fruit")){
+		        System.out.print("Item Name: ");
+		        System.out.println(item.getName());
+			    System.out.print("Item Type: ");
+		        System.out.println(item.getType());
+		        System.out.print("Item price: ");
+		        System.out.println(item.getPrice());
+		        System.out.print("Item Quantity: ");
+		        System.out.println(item.getQuantity());
+					System.out.println();
+				}
+		}
+		System.out.println("Vegetable items are.....");
+				for (Item item:itemlist){
+					if(item.getType().equals("Vegetable")||item.getType().equals("vegetable")){
+				        System.out.print("Item Name: ");
+				        System.out.println(item.getName());
+					    System.out.print("Item Type: ");
+				        System.out.println(item.getType());
+				        System.out.print("Item price: ");
+				        System.out.println(item.getPrice());
+				        System.out.print("Item Quantity: ");
+				        System.out.println(item.getQuantity());
+							System.out.println();
+						}
+		        }
+	    }
+	public void search_item(String name){
+		                       for (Item item:itemlist){
+							   if(item.getName().equals(name)){
+						        System.out.print("Item Name: ");
+						        System.out.println(item.getName());
+							    System.out.print("Item Type: ");
+						        System.out.println(item.getType());
+						        System.out.print("Item price: ");
+						        System.out.println(item.getPrice());
+						        System.out.print("Item Quantity: ");
+						        System.out.println(item.getQuantity());
+									System.out.println();
+
+						}
+		        }
+	   }
+	   public void purchase_sell(){
+		   System.out.print("What do you want to do:\n1.purchase\n2.sell\n");
+		   int b=sc.nextInt();
+		   System.out.print("Which item:");
+		   String name=sc.next();
+		   for(Item item:itemlist){
+			   if(item.getName().equals(name)){
+		         if(b==1){
+		   			System.out.print("Enter Quantity:");
+		   	        int q=sc.nextInt();
+		   			item.setQuantity(q);
+		   			return;
+		   			}else if(b==2){
+		   			System.out.print("Enter Quantity:");
+		   			int q=sc.nextInt();
+		   			item.setQuantity((-1)*q);
+		   			return;
+		   			}else{
+		   			System.out.println("Invalid");
+					}
+	         }
+          }
+	   }
+
+}
+//main class
+class FruitExtend{
+	public static void main(String[] args){
+		Scanner sc=new Scanner(System.in);
+		inventory a=new inventory();
+while(true){
+	System.out.println("-------------------------------");
+	System.out.println("\nWhat do you want to do?\n1.Add item\n2.Display item\n3.CategoryWise display\n4.Add more item\n5.Search an item by name\n6.purchase or sell \n7.Exit");
+	int d=sc.nextInt();
+	switch(d){
+		case 1:System.out.print("How many number of item you want to add:");
+		      int n=sc.nextInt();
+		      for(int j=1;j<n+1;j++){
+			System.out.print("Enter #"+j+"item name:");
+			String name=sc.next();
+			System.out.print("Enter #"+j+"item type:");
+			String type=sc.next();
+			System.out.print("Enter #"+j+"item price:");
+			double price=sc.nextDouble();
+			System.out.print("Enter #"+j+"item quantity:");
+			int quantity=sc.nextInt();
+			a.additem(new Item(name,type,price,quantity));
+		}
+
+		break;
+		case 2:a.displayitem();
+		break;
+		case 3:a.categoryWiseDisplay();
+		break;
+		case 4:System.out.println("Do you want to add more item?");
+		       System.out.println("1.yes\n 2.no");
+		       int t=sc.nextInt();
+		       if(t==1){
+		     	System.out.println("How many?");
+		    	int l=sc.nextInt();
+			    for(int k=1;k<l+1;k++){
+						System.out.print("Enter #"+k+"item name:");
+						String Name=sc.next();
+						System.out.print("Enter #"+k+"item type:");
+						String Type=sc.next();
+						System.out.print("Enter #"+k+"item price:");
+						double Price=sc.nextDouble();
+						System.out.print("Enter #"+k+"item quantity:");
+						int Quantity=sc.nextInt();
+						a.additem(new Item(Name,Type,Price,Quantity));
+		}
+		}else if(t==2){
+			System.out.println("Thank you");
+		}else{
+			System.out.println("Invalid");
+		}
+		break;
+		case 5:System.out.print("Which item  you want to search:");
+		      String name;
+		      name=sc.next();
+		      a.search_item(name);
+		break;
+		case 6:a.purchase_sell();
+		break;
+		case 7: return;
+		default: System.out.println("Invalid key.");
+		  }
+	   }
+	}
+}
